@@ -28,8 +28,9 @@ jobs:
       - name: List files in bin folder (debug)
         run: ls -la bin/
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: APK
-          path: bin/*.apk
+      # Comenta temporalmente el paso de upload-artifact:
+      # - name: Upload APK artifact
+      #   uses: actions/upload-artifact@v3.1.0
+      #   with:
+      #     name: APK
+      #     path: bin/*.apk
