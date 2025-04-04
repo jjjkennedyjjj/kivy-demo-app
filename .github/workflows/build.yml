@@ -1,0 +1,35 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Build APK with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          target: android
+          command: debug
+
+      - name: List files in bin folder (debug)
+        run: ls -la bin/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: APK
+          path: bin/*.apk
